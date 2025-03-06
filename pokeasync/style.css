@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    background-color: blueviolet;
+    text-align: center;
+}
+
+button{
+    width: 80px;
+    height: 30px;
+}
+
+button:hover{
+    background-color: rgba(173, 67, 120, 0.9);
+}

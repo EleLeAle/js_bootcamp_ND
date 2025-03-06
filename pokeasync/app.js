@@ -3,6 +3,7 @@
 // This function make a api request the the endpoint specifed and returns that data.
 
 const button = document.querySelector("button");
+const rock = document.querySelector("#stone")
 const pokemon = document.querySelector("img");
 
 
@@ -11,6 +12,14 @@ button.addEventListener("click",async()=>{
     pokemon.src = value;
     console.log(value)
 });
+
+rock.addEventListener("click",async ()=>{
+    const val = apiRequest();
+    console.log(val);
+    pokemon.src = "";
+})
+
+
 const randomize = () => {
     return Math.floor(Math.random() * 900 + 1);
 };
