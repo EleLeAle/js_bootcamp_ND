@@ -8,6 +8,15 @@ h1{
     background-color: blueviolet;
     text-align: center;
 }
+h2{
+    background-color: beige;
+    text-align: center;
+    margin-bottom: 20px;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
 
 button{
     width: 80px;
@@ -17,3 +26,46 @@ button{
 button:hover{
     background-color: rgba(173, 67, 120, 0.9);
 }
+.wrapGenerator{
+
+}
+.generatorContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 300px;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    gap: 16px;
+}
+.pokemonContainer{
+    border: 2px dashed red;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#teams{
+    display: flex;
+    justify-content: space-evenly;
+    gap:20px;
+    margin:0 20px 20px;
+}
+.teamContainer, .opponentTeam{
+    border: 2px dashed red;
+    width: 80%;
+    height: 300px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: space-evenly;
+    place-items: center;
+}
+
+
