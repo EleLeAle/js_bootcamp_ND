@@ -31,9 +31,10 @@ const winningConditions = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8],
  * @param {HTMLElement} clickedCell - The cell that was clicked in the UI.
  * @param {number} clickedCellIndex - The index of the clicked cell in the gameState.
  */
+// Update the game state to reflect the move
+// Display the current player's symbol in the clicked cell
 
 const cells = document.getElementsByClassName('cell');
-console.log('cells',cells);
 
 for(let cell of cells){
     cell.addEventListener("click", function(event){
@@ -43,8 +44,17 @@ for(let cell of cells){
 }
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
-    // Update the game state to reflect the move
-    // Display the current player's symbol in the clicked cell
+    if(gameState[clickedCellIndex]===''){
+        gameState[clickedCellIndex] = currentPlayer;
+        clickedCell.innerHTML = currentPlayer;
+        // handlePlayerChange();
+        handleResultValidation();
+    }else{
+        statusDisplay.innerHTML ='This cell is occupied, try another one';
+        setTimeout(() => {
+            statusDisplay.innerHTML = currentPlayerTurn()
+        },2000);
+    }
 }
 
 /**
@@ -54,8 +64,17 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
  * Also updates the UI text to notify whose turn it is.
  */
 function handlePlayerChange() {
+
     // Toggle the current player
     // Update the status text to reflect the new player's turn
+    if(currentPlayer === "X"){
+        currentPlayer = "0"
+        console.log(currentPlayer);
+    }else{
+        currentPlayer = "X";
+    }
+    statusDisplay.innerHTML = currentPlayerTurn()
+    console.log(gameState[winningConditions[0][0]])
 }
 
 /**
@@ -69,8 +88,25 @@ function handlePlayerChange() {
 function handleResultValidation() {
     let roundWon = false;
 
-    // Iterate through each winning condition
+    // winningConditions = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
 
+    // Iterate through each winning condition
+    for(let i = 0; i < winningConditions.length-1; i++){
+        let j=0
+        console.log('check status first:',gameState[winningConditions[i][j]])
+        if(gameState[winningConditions[i][j]]===gameState[winningConditions[i][j+1]]){
+            j=j+1
+            if(gameState[winningConditions[i][j]]===gameState[winningConditions[i][j+1]]){
+                roundWon = true;
+                console.log('wiiiiin')
+            }
+        }
+    }
+    if(roundWon){
+
+    }else{
+        handlePlayerChange()
+    }
     // Destructure the three cell indices that form a potential win
 
     // If any cell is empty, skip this iteration
