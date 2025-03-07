@@ -1,7 +1,7 @@
 /**********************************************
  * File: app.js
  * Description: A simple Tic-Tac-Toe game
- * Author: [Your Name]
+ * Author: [Elen Francesca]
  **********************************************/
 
 // Select the status display element from the DOM.
@@ -22,7 +22,7 @@ statusDisplay.innerHTML = currentPlayerTurn();
 // Define the possible winning conditions for Tic-Tac-Toe
 // Each array within this array represents a set of indices in 'gameState'
 // that forms a winning line
-const winningConditions = [];
+const winningConditions = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
 
 /**
  * handleCellPlayed
@@ -31,6 +31,17 @@ const winningConditions = [];
  * @param {HTMLElement} clickedCell - The cell that was clicked in the UI.
  * @param {number} clickedCellIndex - The index of the clicked cell in the gameState.
  */
+
+const cells = document.getElementsByClassName('cell');
+console.log('cells',cells);
+
+for(let cell of cells){
+    cell.addEventListener("click", function(event){
+        let clickedCellIndex = event.target.getAttribute('data-cell-index');
+        handleCellPlayed(event.target, clickedCellIndex);
+    })
+}
+
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     // Update the game state to reflect the move
     // Display the current player's symbol in the clicked cell
