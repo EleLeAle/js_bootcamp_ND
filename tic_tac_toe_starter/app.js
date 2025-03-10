@@ -134,6 +134,7 @@ function handleResultValidation(){
     if (gameActive) {
         handlePlayerChange();
     }else{
+        // TODO don't let change cell.innerHTML of empty cells
         setTimeout(() => {
             handleRestartGame();
         },2000);
