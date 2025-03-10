@@ -4,6 +4,8 @@
 
 let pokemonTeamState =[];
 let pokemonOpponentTeam =[];
+let movesFromData;
+let selectedMoves = [];
 
 const button = document.querySelector("button");
 const rock = document.querySelector("#stone");
@@ -19,6 +21,7 @@ button.addEventListener("click",async()=>{
     const value = await apiRequest();
     pokemon.src = value;
     console.log(value)
+    let moves = await apiRequest();
 });
 
 rock.addEventListener("click",async ()=>{
@@ -48,8 +51,22 @@ async function apiRequest() {
         const request = await fetch(endpoint);
         const data = await request.json();
         // here we can find movies
-        console.log('data',data)
+        console.log('data', data);
+
+        movesFromData = data.moves;
+
+        console.log('MOVES', movesFromData,data.sprites.front_shiny);
+        while (selectedMoves.length < 4) {
+            const randomIndex = Math.floor(Math.random() * movesFromData.length);
+            const move = movesFromData[randomIndex].move.name;
+            if (!selectedMoves.includes(move)) {
+                selectedMoves.push(move);
+            }
+        }
+
+        console.log("Selected Moves:", selectedMoves);
         return data.sprites.front_shiny;
+
     } catch (error) {
         console.error(error);
     }
@@ -67,7 +84,6 @@ function addPokemonDom(){
     }else{
         h2Team.innerHTML='You already have 6 pokemons'
     }
-
 }
 
 const randomize = () => {
@@ -85,6 +101,13 @@ const randomize = () => {
 
 /*
     ## homework
+    // pt 2 assignment
+
+// when making an api request we are recieving a bunch of information
+// but we are only using 1 img from that data
+// find all of the pokemon moves for each pokemon on your team and randomly attach
+// 4 of those moves to those pokemon
+
     opkemon_name{
     ing:"url";
     moves:[' 4 random moves'];

@@ -40,9 +40,14 @@ statusDisplay.innerHTML = currentPlayerTurn();
 
 for(let cell of cells){
 
+
+
     console.log('\n We are  in checking in which cell we are\n')
 
     cell.addEventListener("click", function(event){
+        if(gameActive === false){
+            return
+        }
 
         let clickedCellIndex = event.target.getAttribute('data-cell-index');
 
@@ -134,7 +139,6 @@ function handleResultValidation(){
     if (gameActive) {
         handlePlayerChange();
     }else{
-        // TODO don't let change cell.innerHTML of empty cells
         setTimeout(() => {
             handleRestartGame();
         },2000);
